@@ -1,24 +1,26 @@
 import java.util.*;
 
-public class Cupcake {
+public class Cupcake{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        Integer[] calories = new Integer[n];
+        long[] calories = new long[n];
 
         for (int i = 0; i < n; i++) {
-            calories[i] = sc.nextInt();
+            calories[i] = sc.nextLong();
         }
 
-        // Sort in DESCENDING order
-        Arrays.sort(calories, Collections.reverseOrder());
+        // Sort ascending
+        Arrays.sort(calories);
 
         long miles = 0;
+        long power = 1; // 2^0
 
-        // Apply formula: calories[i] * 2^i
-        for (int i = 0; i < n; i++) {
-            miles += calories[i] * (1L << i);
+        // Traverse from largest to smallest
+        for (int i = n - 1; i >= 0; i--) {
+            miles += calories[i] * power;
+            power *= 2;
         }
 
         System.out.println(miles);
