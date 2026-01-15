@@ -1,33 +1,27 @@
 import java.util.*;
+
 public class Cupcake {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Read n
         int n = sc.nextInt();
+        Integer[] calories = new Integer[n];
 
-        // Read calorie counts into an array
-        int[] calories = new int[n];
         for (int i = 0; i < n; i++) {
             calories[i] = sc.nextInt();
         }
 
-        // Sort the array in descending order
-        Arrays.sort(calories);
-        // Reverse traversal will give descending order
+        // Sort in DESCENDING order
+        Arrays.sort(calories, Collections.reverseOrder());
 
         long miles = 0;
-        long power = 1; // represents 2^j
 
-        // Calculate minimum miles
-        for (int i = n - 1; i >= 0; i--) {
-            miles += calories[i] * power;
-            power *= 2;
+        // Apply formula: calories[i] * 2^i
+        for (int i = 0; i < n; i++) {
+            miles += calories[i] * (1L << i);
         }
 
-        // Print the result
         System.out.println(miles);
-
         sc.close();
     }
 }
